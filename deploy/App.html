@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Son of Son of Excercise1</title>
+
+    <script type="text/javascript" src="/apps/2.0rc1/sdk.js"></script>
+
+    <script type="text/javascript">
+        Rally.onReady(function () {
+                Ext.define("CustomApp",{extend:"Rally.app.App",componentCls:"taco",items:[{html:'<a href="https://help.rallydev.com/apps/2.0rc1/doc/#!/api/Rally.data.WsapiDataStore">Hint!<a>'}],fireFromTheStore:function(store,records){var blockedRecords=_.filter(records,function(record){var blocked=record.get("Blocked");return blocked}),record=records[0];record.set("Blocked",!0),record.save({callback:function(result,operation){operation.wasSuccessful()&&console.log(result.get("Name")+" saved")}}),Ext.Msg.alert("Status","Store Loaded with "+records.length+" records and "+blockedRecords.length+" blocked records.")},launch:function(){var store=Ext.create("Rally.data.WsapiDataStore",{model:"User Story",listeners:{load:function(store,data,success){console.log(data)}},filters:[{property:"Blocked",value:!1}],autoLoad:!0,fetch:!0});store.on("load",this.fireFromTheStore)}});
+
+            Rally.launchApp('CustomApp', {
+                name:"Son of Son of Excercise1",
+	            parentRepos:"RallyCommunity/RallyCertifiedDeveloperExercise1,ferentchak/ex1readme"
+            });
+
+        });
+    </script>
+
+
+    <style type="text/css">
+        .x-panel-body-default {
+     /* Add app styles here !! */
+     border-style:none;
+}
+
+    </style>
+</head>
+<body></body>
+</html>
